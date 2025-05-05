@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package orders;
+
+option go_package = "ord.v1.ords";
+
+
+service Orders {
+  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse);
+  rpc DeleteOrder (DeleteOrderRequest) returns (DeleteOrderResponse);
+  rpc GetOrder (GetOrderRequest) returns (GetOrderResponse);
+  rpc ChangeOrderStatus (ChangeOrderStatusRequest) returns (ChangeOrderStatusResponse);
+  rpc ListOrderHistory (OrderHistoryRequest) returns (OrderHistoryResponse);
+}
+
+enum OperationStatus {
+  STATUS_OK = 0;
+  STATUS_INVALID_USER = 1;
+  STATUS_INVALID_TOY = 2;
+  STATUS_INVALID_ORDER = 3;
+  STATUS_INVALID_ADDRESS = 4;
+  STATUS_INTERNAL_ERROR = 5;
+}
+
+enum OrderStatus {
+  STATUS_DELIVERED = 0;
+  STATUS_PROCESSING = 1;
+  STATUS_ACCEPTED = 2;
+  STATUS_DELIVERING = 3;
+  STATUS_DELAYED = 4;
+  STATUS_FAILED = 5;
+}
+
+message Order {
+  int64 order_id = 1;
+  int64 user_id = 2;
+  string address = 3;
+  OrderStatus order_status = 4;
+  string created_at = 5;
+  repeated OrderItem items = 6;
+}
+
+message OrderItem {
+  int64 toy_id = 1;
+  string toy_name = 2;
+  int32 quantity = 3;
+}
+
+message CreateOrderRequest {
+  repeated OrderItem toys = 1;
+  string address = 2;
+}
+
+message CreateOrderResponse {
+  int64 order_id = 1;
+  OperationStatus order_status = 2;
+  string error_message = 3;
+}
+
+message DeleteOrderRequest {
+  int64 order_id = 2;
+}
+
+message DeleteOrderResponse {
+  OperationStatus status = 1;
+}
+
+message GetOrderRequest {
+  int64 order_id = 1;
+}
+
+message GetOrderResponse {
+  Order order = 1;
+}
+
+message ChangeOrderStatusRequest {
+  int64 order_id = 1;
+  OrderStatus new_order_status = 2;
+}
+
+message ChangeOrderStatusResponse {
+  OperationStatus status = 1;
+}
+
+message OrderHistoryRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+message OrderHistoryResponse {
+  repeated Order orders = 1;
+  int32 total_pages = 2;
+}
