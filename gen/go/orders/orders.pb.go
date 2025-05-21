@@ -227,6 +227,8 @@ type OrderItem struct {
 	ToyId         int64                  `protobuf:"varint,1,opt,name=toy_id,json=toyId,proto3" json:"toy_id,omitempty"`
 	ToyName       string                 `protobuf:"bytes,2,opt,name=toy_name,json=toyName,proto3" json:"toy_name,omitempty"`
 	Quantity      int32                  `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	ImageUrl      string                 `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	Value         int64                  `protobuf:"varint,5,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -278,6 +280,20 @@ func (x *OrderItem) GetToyName() string {
 func (x *OrderItem) GetQuantity() int32 {
 	if x != nil {
 		return x.Quantity
+	}
+	return 0
+}
+
+func (x *OrderItem) GetImageUrl() string {
+	if x != nil {
+		return x.ImageUrl
+	}
+	return ""
+}
+
+func (x *OrderItem) GetValue() int64 {
+	if x != nil {
+		return x.Value
 	}
 	return 0
 }
@@ -782,11 +798,13 @@ const file_orders_orders_proto_rawDesc = "" +
 	"\forder_status\x18\x04 \x01(\x0e2\x13.orders.OrderStatusR\vorderStatus\x12\x1d\n" +
 	"\n" +
 	"created_at\x18\x05 \x01(\tR\tcreatedAt\x12'\n" +
-	"\x05items\x18\x06 \x03(\v2\x11.orders.OrderItemR\x05items\"Y\n" +
+	"\x05items\x18\x06 \x03(\v2\x11.orders.OrderItemR\x05items\"\x8c\x01\n" +
 	"\tOrderItem\x12\x15\n" +
 	"\x06toy_id\x18\x01 \x01(\x03R\x05toyId\x12\x19\n" +
 	"\btoy_name\x18\x02 \x01(\tR\atoyName\x12\x1a\n" +
-	"\bquantity\x18\x03 \x01(\x05R\bquantity\"U\n" +
+	"\bquantity\x18\x03 \x01(\x05R\bquantity\x12\x1b\n" +
+	"\timage_url\x18\x04 \x01(\tR\bimageUrl\x12\x14\n" +
+	"\x05value\x18\x05 \x01(\x03R\x05value\"U\n" +
 	"\x12CreateOrderRequest\x12%\n" +
 	"\x04toys\x18\x01 \x03(\v2\x11.orders.OrderItemR\x04toys\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress\"\x91\x01\n" +

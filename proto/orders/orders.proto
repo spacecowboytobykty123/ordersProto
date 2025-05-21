@@ -71,6 +71,8 @@ message OrderItem {
   int64 toy_id = 1;
   string toy_name = 2;
   int32 quantity = 3;
+  string image_url = 4;
+  int64 value = 5;
 }
 
 message CreateOrderRequest {
