@@ -4,13 +4,40 @@ package orders;
 
 option go_package = "ord.v1.ords";
 
+import "google/api/annotations.proto";
 
 service Orders {
-  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse);
-  rpc DeleteOrder (DeleteOrderRequest) returns (DeleteOrderResponse);
-  rpc GetOrder (GetOrderRequest) returns (GetOrderResponse);
-  rpc ChangeOrderStatus (ChangeOrderStatusRequest) returns (ChangeOrderStatusResponse);
-  rpc ListOrderHistory (OrderHistoryRequest) returns (OrderHistoryResponse);
+  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse) {
+    option (google.api.http) = {
+      post: "/v1/orders"
+      body: "*"
+    };
+  }
+
+  rpc DeleteOrder (DeleteOrderRequest) returns (DeleteOrderResponse) {
+    option (google.api.http) = {
+      delete: "/v1/orders/{order_id}"
+    };
+  }
+
+  rpc GetOrder (GetOrderRequest) returns (GetOrderResponse) {
+    option (google.api.http) = {
+      get: "/v1/orders/{order_id}"
+    };
+  }
+
+  rpc ChangeOrderStatus (ChangeOrderStatusRequest) returns (ChangeOrderStatusResponse) {
+    option (google.api.http) = {
+      patch: "/v1/orders/{order_id}/status"
+      body: "*"
+    };
+  }
+
+  rpc ListOrderHistory (OrderHistoryRequest) returns (OrderHistoryResponse) {
+    option (google.api.http) = {
+      get: "/v1/orders/history"
+    };
+  }
 }
 
 enum OperationStatus {
@@ -58,7 +85,7 @@ message CreateOrderResponse {
 }
 
 message DeleteOrderRequest {
-  int64 order_id = 2;
+  int64 order_id = 1;
 }
 
 message DeleteOrderResponse {
