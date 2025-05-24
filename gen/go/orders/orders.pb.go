@@ -786,6 +786,170 @@ func (x *OrderHistoryResponse) GetTotalPages() int32 {
 	return 0
 }
 
+type OrderBackResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OrderId       int64                  `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	OrderStatus   OperationStatus        `protobuf:"varint,2,opt,name=order_status,json=orderStatus,proto3,enum=orders.OperationStatus" json:"order_status,omitempty"`
+	ErrorMessage  string                 `protobuf:"bytes,3,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OrderBackResponse) Reset() {
+	*x = OrderBackResponse{}
+	mi := &file_orders_orders_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OrderBackResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderBackResponse) ProtoMessage() {}
+
+func (x *OrderBackResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_orders_orders_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderBackResponse.ProtoReflect.Descriptor instead.
+func (*OrderBackResponse) Descriptor() ([]byte, []int) {
+	return file_orders_orders_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *OrderBackResponse) GetOrderId() int64 {
+	if x != nil {
+		return x.OrderId
+	}
+	return 0
+}
+
+func (x *OrderBackResponse) GetOrderStatus() OperationStatus {
+	if x != nil {
+		return x.OrderStatus
+	}
+	return OperationStatus_STATUS_OK
+}
+
+func (x *OrderBackResponse) GetErrorMessage() string {
+	if x != nil {
+		return x.ErrorMessage
+	}
+	return ""
+}
+
+type ToyReturn struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ToyId         int64                  `protobuf:"varint,1,opt,name=toy_id,json=toyId,proto3" json:"toy_id,omitempty"`
+	Quantity      int32                  `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToyReturn) Reset() {
+	*x = ToyReturn{}
+	mi := &file_orders_orders_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToyReturn) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToyReturn) ProtoMessage() {}
+
+func (x *ToyReturn) ProtoReflect() protoreflect.Message {
+	mi := &file_orders_orders_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToyReturn.ProtoReflect.Descriptor instead.
+func (*ToyReturn) Descriptor() ([]byte, []int) {
+	return file_orders_orders_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ToyReturn) GetToyId() int64 {
+	if x != nil {
+		return x.ToyId
+	}
+	return 0
+}
+
+func (x *ToyReturn) GetQuantity() int32 {
+	if x != nil {
+		return x.Quantity
+	}
+	return 0
+}
+
+type OrderBackRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Toys          []*ToyReturn           `protobuf:"bytes,1,rep,name=toys,proto3" json:"toys,omitempty"`
+	Address       string                 `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OrderBackRequest) Reset() {
+	*x = OrderBackRequest{}
+	mi := &file_orders_orders_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OrderBackRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderBackRequest) ProtoMessage() {}
+
+func (x *OrderBackRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_orders_orders_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderBackRequest.ProtoReflect.Descriptor instead.
+func (*OrderBackRequest) Descriptor() ([]byte, []int) {
+	return file_orders_orders_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *OrderBackRequest) GetToys() []*ToyReturn {
+	if x != nil {
+		return x.Toys
+	}
+	return nil
+}
+
+func (x *OrderBackRequest) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
 var File_orders_orders_proto protoreflect.FileDescriptor
 
 const file_orders_orders_proto_rawDesc = "" +
@@ -831,7 +995,17 @@ const file_orders_orders_proto_rawDesc = "" +
 	"\x14OrderHistoryResponse\x12%\n" +
 	"\x06orders\x18\x01 \x03(\v2\r.orders.OrderR\x06orders\x12\x1f\n" +
 	"\vtotal_pages\x18\x02 \x01(\x05R\n" +
-	"totalPages*\xa2\x01\n" +
+	"totalPages\"\x8f\x01\n" +
+	"\x11OrderBackResponse\x12\x19\n" +
+	"\border_id\x18\x01 \x01(\x03R\aorderId\x12:\n" +
+	"\forder_status\x18\x02 \x01(\x0e2\x17.orders.OperationStatusR\vorderStatus\x12#\n" +
+	"\rerror_message\x18\x03 \x01(\tR\ferrorMessage\">\n" +
+	"\tToyReturn\x12\x15\n" +
+	"\x06toy_id\x18\x01 \x01(\x03R\x05toyId\x12\x1a\n" +
+	"\bquantity\x18\x02 \x01(\x05R\bquantity\"S\n" +
+	"\x10OrderBackRequest\x12%\n" +
+	"\x04toys\x18\x01 \x03(\v2\x11.orders.ToyReturnR\x04toys\x12\x18\n" +
+	"\aaddress\x18\x02 \x01(\tR\aaddress*\xa2\x01\n" +
 	"\x0fOperationStatus\x12\r\n" +
 	"\tSTATUS_OK\x10\x00\x12\x17\n" +
 	"\x13STATUS_INVALID_USER\x10\x01\x12\x16\n" +
@@ -867,7 +1041,7 @@ func file_orders_orders_proto_rawDescGZIP() []byte {
 }
 
 var file_orders_orders_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_orders_orders_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_orders_orders_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_orders_orders_proto_goTypes = []any{
 	(OperationStatus)(0),              // 0: orders.OperationStatus
 	(OrderStatus)(0),                  // 1: orders.OrderStatus
@@ -883,6 +1057,9 @@ var file_orders_orders_proto_goTypes = []any{
 	(*ChangeOrderStatusResponse)(nil), // 11: orders.ChangeOrderStatusResponse
 	(*OrderHistoryRequest)(nil),       // 12: orders.OrderHistoryRequest
 	(*OrderHistoryResponse)(nil),      // 13: orders.OrderHistoryResponse
+	(*OrderBackResponse)(nil),         // 14: orders.OrderBackResponse
+	(*ToyReturn)(nil),                 // 15: orders.ToyReturn
+	(*OrderBackRequest)(nil),          // 16: orders.OrderBackRequest
 }
 var file_orders_orders_proto_depIdxs = []int32{
 	1,  // 0: orders.Order.order_status:type_name -> orders.OrderStatus
@@ -894,21 +1071,23 @@ var file_orders_orders_proto_depIdxs = []int32{
 	1,  // 6: orders.ChangeOrderStatusRequest.new_order_status:type_name -> orders.OrderStatus
 	0,  // 7: orders.ChangeOrderStatusResponse.status:type_name -> orders.OperationStatus
 	2,  // 8: orders.OrderHistoryResponse.orders:type_name -> orders.Order
-	4,  // 9: orders.Orders.CreateOrder:input_type -> orders.CreateOrderRequest
-	6,  // 10: orders.Orders.DeleteOrder:input_type -> orders.DeleteOrderRequest
-	8,  // 11: orders.Orders.GetOrder:input_type -> orders.GetOrderRequest
-	10, // 12: orders.Orders.ChangeOrderStatus:input_type -> orders.ChangeOrderStatusRequest
-	12, // 13: orders.Orders.ListOrderHistory:input_type -> orders.OrderHistoryRequest
-	5,  // 14: orders.Orders.CreateOrder:output_type -> orders.CreateOrderResponse
-	7,  // 15: orders.Orders.DeleteOrder:output_type -> orders.DeleteOrderResponse
-	9,  // 16: orders.Orders.GetOrder:output_type -> orders.GetOrderResponse
-	11, // 17: orders.Orders.ChangeOrderStatus:output_type -> orders.ChangeOrderStatusResponse
-	13, // 18: orders.Orders.ListOrderHistory:output_type -> orders.OrderHistoryResponse
-	14, // [14:19] is the sub-list for method output_type
-	9,  // [9:14] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	0,  // 9: orders.OrderBackResponse.order_status:type_name -> orders.OperationStatus
+	15, // 10: orders.OrderBackRequest.toys:type_name -> orders.ToyReturn
+	4,  // 11: orders.Orders.CreateOrder:input_type -> orders.CreateOrderRequest
+	6,  // 12: orders.Orders.DeleteOrder:input_type -> orders.DeleteOrderRequest
+	8,  // 13: orders.Orders.GetOrder:input_type -> orders.GetOrderRequest
+	10, // 14: orders.Orders.ChangeOrderStatus:input_type -> orders.ChangeOrderStatusRequest
+	12, // 15: orders.Orders.ListOrderHistory:input_type -> orders.OrderHistoryRequest
+	5,  // 16: orders.Orders.CreateOrder:output_type -> orders.CreateOrderResponse
+	7,  // 17: orders.Orders.DeleteOrder:output_type -> orders.DeleteOrderResponse
+	9,  // 18: orders.Orders.GetOrder:output_type -> orders.GetOrderResponse
+	11, // 19: orders.Orders.ChangeOrderStatus:output_type -> orders.ChangeOrderStatusResponse
+	13, // 20: orders.Orders.ListOrderHistory:output_type -> orders.OrderHistoryResponse
+	16, // [16:21] is the sub-list for method output_type
+	11, // [11:16] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_orders_orders_proto_init() }
@@ -922,7 +1101,7 @@ func file_orders_orders_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_orders_orders_proto_rawDesc), len(file_orders_orders_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   12,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
