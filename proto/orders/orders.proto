@@ -38,6 +38,13 @@ service Orders {
       get: "/v1/orders/history"
     };
   }
+
+  rpc OrderBack (OrderBackRequest) returns (OrderBackResponse) {
+    option (google.api.http) = {
+      post: "/v1/orders/back"
+      body: "*"
+    };
+  }
 }
 
 enum OperationStatus {
