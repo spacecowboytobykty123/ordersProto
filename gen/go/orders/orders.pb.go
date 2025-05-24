@@ -850,6 +850,9 @@ type ToyReturn struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ToyId         int64                  `protobuf:"varint,1,opt,name=toy_id,json=toyId,proto3" json:"toy_id,omitempty"`
 	Quantity      int32                  `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	ImageUrl      string                 `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
+	Value         int64                  `protobuf:"varint,5,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -894,6 +897,27 @@ func (x *ToyReturn) GetToyId() int64 {
 func (x *ToyReturn) GetQuantity() int32 {
 	if x != nil {
 		return x.Quantity
+	}
+	return 0
+}
+
+func (x *ToyReturn) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *ToyReturn) GetImageUrl() string {
+	if x != nil {
+		return x.ImageUrl
+	}
+	return ""
+}
+
+func (x *ToyReturn) GetValue() int64 {
+	if x != nil {
+		return x.Value
 	}
 	return 0
 }
@@ -999,10 +1023,13 @@ const file_orders_orders_proto_rawDesc = "" +
 	"\x11OrderBackResponse\x12\x19\n" +
 	"\border_id\x18\x01 \x01(\x03R\aorderId\x12:\n" +
 	"\forder_status\x18\x02 \x01(\x0e2\x17.orders.OperationStatusR\vorderStatus\x12#\n" +
-	"\rerror_message\x18\x03 \x01(\tR\ferrorMessage\">\n" +
+	"\rerror_message\x18\x03 \x01(\tR\ferrorMessage\"\x87\x01\n" +
 	"\tToyReturn\x12\x15\n" +
 	"\x06toy_id\x18\x01 \x01(\x03R\x05toyId\x12\x1a\n" +
-	"\bquantity\x18\x02 \x01(\x05R\bquantity\"S\n" +
+	"\bquantity\x18\x02 \x01(\x05R\bquantity\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12\x1b\n" +
+	"\timage_url\x18\x04 \x01(\tR\bimageUrl\x12\x14\n" +
+	"\x05value\x18\x05 \x01(\x03R\x05value\"S\n" +
 	"\x10OrderBackRequest\x12%\n" +
 	"\x04toys\x18\x01 \x03(\v2\x11.orders.ToyReturnR\x04toys\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress*\xa2\x01\n" +

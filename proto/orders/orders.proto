@@ -130,6 +130,9 @@ message OrderBackResponse {
 message ToyReturn {
   int64 toy_id = 1;
   int32 quantity = 2;
+  string title = 3;
+  string image_url = 4;
+  int64 value = 5;
 }
 
 message OrderBackRequest {
