@@ -5,6 +5,23 @@ package orders;
 option go_package = "ord.v1.ords";
 
 import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Orders API";
+    version: "1.0";
+    description: "API for managing orders including creation, deletion, status updates, and returns.";
+    contact: {
+      name: "Support Team";
+      url: "https://yourdomain.com";
+      email: "support@yourdomain.com";
+    }
+  };
+  schemes: HTTPS;
+  consumes: "application/json";
+  produces: "application/json";
+};
 
 service Orders {
   rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse) {
@@ -12,17 +29,29 @@ service Orders {
       post: "/v1/orders"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Create a new order"
+      description: "Submits a new order with selected toys and user address."
+    };
   }
 
   rpc DeleteOrder (DeleteOrderRequest) returns (DeleteOrderResponse) {
     option (google.api.http) = {
       delete: "/v1/orders/{order_id}"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Delete an order"
+      description: "Removes an existing order by its ID."
+    };
   }
 
   rpc GetOrder (GetOrderRequest) returns (GetOrderResponse) {
     option (google.api.http) = {
       get: "/v1/orders/{order_id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Retrieve order details"
+      description: "Fetches a specific order using its ID."
     };
   }
 
@@ -31,11 +60,19 @@ service Orders {
       patch: "/v1/orders/{order_id}/status"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Change order status"
+      description: "Updates the status of an existing order (e.g., delivered, delayed)."
+    };
   }
 
   rpc ListOrderHistory (OrderHistoryRequest) returns (OrderHistoryResponse) {
     option (google.api.http) = {
       get: "/v1/orders/history"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "List order history"
+      description: "Returns a paginated history of user orders."
     };
   }
 
@@ -43,6 +80,10 @@ service Orders {
     option (google.api.http) = {
       post: "/v1/orders/back"
       body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Return items from an order"
+      description: "Allows users to return selected toys from a previously placed order."
     };
   }
 }

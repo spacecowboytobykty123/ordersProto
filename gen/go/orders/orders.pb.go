@@ -7,6 +7,7 @@
 package ord_v1_ords
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -978,7 +979,7 @@ var File_orders_orders_proto protoreflect.FileDescriptor
 
 const file_orders_orders_proto_rawDesc = "" +
 	"\n" +
-	"\x13orders/orders.proto\x12\x06orders\x1a\x1cgoogle/api/annotations.proto\"\xd5\x01\n" +
+	"\x13orders/orders.proto\x12\x06orders\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd5\x01\n" +
 	"\x05Order\x12\x19\n" +
 	"\border_id\x18\x01 \x01(\x03R\aorderId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x03R\x06userId\x12\x18\n" +
@@ -1046,15 +1047,18 @@ const file_orders_orders_proto_rawDesc = "" +
 	"\x0fSTATUS_ACCEPTED\x10\x02\x12\x15\n" +
 	"\x11STATUS_DELIVERING\x10\x03\x12\x12\n" +
 	"\x0eSTATUS_DELAYED\x10\x04\x12\x11\n" +
-	"\rSTATUS_FAILED\x10\x052\xf9\x04\n" +
-	"\x06Orders\x12]\n" +
-	"\vCreateOrder\x12\x1a.orders.CreateOrderRequest\x1a\x1b.orders.CreateOrderResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
-	"/v1/orders\x12e\n" +
-	"\vDeleteOrder\x12\x1a.orders.DeleteOrderRequest\x1a\x1b.orders.DeleteOrderResponse\"\x1d\x82\xd3\xe4\x93\x02\x17*\x15/v1/orders/{order_id}\x12\\\n" +
-	"\bGetOrder\x12\x17.orders.GetOrderRequest\x1a\x18.orders.GetOrderResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/orders/{order_id}\x12\x81\x01\n" +
-	"\x11ChangeOrderStatus\x12 .orders.ChangeOrderStatusRequest\x1a!.orders.ChangeOrderStatusResponse\"'\x82\xd3\xe4\x93\x02!:\x01*2\x1c/v1/orders/{order_id}/status\x12i\n" +
-	"\x10ListOrderHistory\x12\x1b.orders.OrderHistoryRequest\x1a\x1c.orders.OrderHistoryResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/v1/orders/history\x12\\\n" +
-	"\tOrderBack\x12\x18.orders.OrderBackRequest\x1a\x19.orders.OrderBackResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/orders/backB\rZ\vord.v1.ordsb\x06proto3"
+	"\rSTATUS_FAILED\x10\x052\xd3\b\n" +
+	"\x06Orders\x12\xae\x01\n" +
+	"\vCreateOrder\x12\x1a.orders.CreateOrderRequest\x1a\x1b.orders.CreateOrderResponse\"f\x92AN\x12\x12Create a new order\x1a8Submits a new order with selected toys and user address.\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
+	"/v1/orders\x12\x9f\x01\n" +
+	"\vDeleteOrder\x12\x1a.orders.DeleteOrderRequest\x1a\x1b.orders.DeleteOrderResponse\"W\x92A7\x12\x0fDelete an order\x1a$Removes an existing order by its ID.\x82\xd3\xe4\x93\x02\x17*\x15/v1/orders/{order_id}\x12\x9f\x01\n" +
+	"\bGetOrder\x12\x17.orders.GetOrderRequest\x1a\x18.orders.GetOrderResponse\"`\x92A@\x12\x16Retrieve order details\x1a&Fetches a specific order using its ID.\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/orders/{order_id}\x12\xdf\x01\n" +
+	"\x11ChangeOrderStatus\x12 .orders.ChangeOrderStatusRequest\x1a!.orders.ChangeOrderStatusResponse\"\x84\x01\x92AZ\x12\x13Change order status\x1aCUpdates the status of an existing order (e.g., delivered, delayed).\x82\xd3\xe4\x93\x02!:\x01*2\x1c/v1/orders/{order_id}/status\x12\xad\x01\n" +
+	"\x10ListOrderHistory\x12\x1b.orders.OrderHistoryRequest\x1a\x1c.orders.OrderHistoryResponse\"^\x92AA\x12\x12List order history\x1a+Returns a paginated history of user orders.\x82\xd3\xe4\x93\x02\x14\x12\x12/v1/orders/history\x12\xc1\x01\n" +
+	"\tOrderBack\x12\x18.orders.OrderBackRequest\x1a\x19.orders.OrderBackResponse\"\x7f\x92Ab\x12\x1aReturn items from an order\x1aDAllows users to return selected toys from a previously placed order.\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/orders/backB\xe0\x01\x92A\xcf\x01\x12\xa5\x01\n" +
+	"\n" +
+	"Orders API\x12RAPI for managing orders including creation, deletion, status updates, and returns.\">\n" +
+	"\fSupport Team\x12\x16https://yourdomain.com\x1a\x16support@yourdomain.com2\x031.0*\x01\x022\x10application/json:\x10application/jsonZ\vord.v1.ordsb\x06proto3"
 
 var (
 	file_orders_orders_proto_rawDescOnce sync.Once

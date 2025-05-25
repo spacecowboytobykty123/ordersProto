@@ -1,0 +1,479 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Orders API",
+    "description": "API for managing orders including creation, deletion, status updates, and returns.",
+    "version": "1.0",
+    "contact": {
+      "name": "Support Team",
+      "url": "https://yourdomain.com",
+      "email": "support@yourdomain.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Orders"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/orders": {
+      "post": {
+        "summary": "Create a new order",
+        "description": "Submits a new order with selected toys and user address.",
+        "operationId": "Orders_CreateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ordersCreateOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ordersCreateOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/orders/back": {
+      "post": {
+        "summary": "Return items from an order",
+        "description": "Allows users to return selected toys from a previously placed order.",
+        "operationId": "Orders_OrderBack",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ordersOrderBackResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ordersOrderBackRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/orders/history": {
+      "get": {
+        "summary": "List order history",
+        "description": "Returns a paginated history of user orders.",
+        "operationId": "Orders_ListOrderHistory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ordersOrderHistoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/orders/{orderId}": {
+      "get": {
+        "summary": "Retrieve order details",
+        "description": "Fetches a specific order using its ID.",
+        "operationId": "Orders_GetOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ordersGetOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      },
+      "delete": {
+        "summary": "Delete an order",
+        "description": "Removes an existing order by its ID.",
+        "operationId": "Orders_DeleteOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ordersDeleteOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/v1/orders/{orderId}/status": {
+      "patch": {
+        "summary": "Change order status",
+        "description": "Updates the status of an existing order (e.g., delivered, delayed).",
+        "operationId": "Orders_ChangeOrderStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ordersChangeOrderStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrdersChangeOrderStatusBody"
+            }
+          }
+        ],
+        "tags": [
+          "Orders"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "OrdersChangeOrderStatusBody": {
+      "type": "object",
+      "properties": {
+        "newOrderStatus": {
+          "$ref": "#/definitions/ordersOrderStatus"
+        }
+      }
+    },
+    "ordersChangeOrderStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ordersOperationStatus"
+        }
+      }
+    },
+    "ordersCreateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "toys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ordersOrderItem"
+          }
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "ordersCreateOrderResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orderStatus": {
+          "$ref": "#/definitions/ordersOperationStatus"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "ordersDeleteOrderResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ordersOperationStatus"
+        }
+      }
+    },
+    "ordersGetOrderResponse": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "$ref": "#/definitions/ordersOrder"
+        }
+      }
+    },
+    "ordersOperationStatus": {
+      "type": "string",
+      "enum": [
+        "STATUS_OK",
+        "STATUS_INVALID_USER",
+        "STATUS_INVALID_TOY",
+        "STATUS_INVALID_ORDER",
+        "STATUS_INVALID_ADDRESS",
+        "STATUS_INTERNAL_ERROR"
+      ],
+      "default": "STATUS_OK"
+    },
+    "ordersOrder": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "address": {
+          "type": "string"
+        },
+        "orderStatus": {
+          "$ref": "#/definitions/ordersOrderStatus"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ordersOrderItem"
+          }
+        }
+      }
+    },
+    "ordersOrderBackRequest": {
+      "type": "object",
+      "properties": {
+        "toys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ordersToyReturn"
+          }
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "ordersOrderBackResponse": {
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orderStatus": {
+          "$ref": "#/definitions/ordersOperationStatus"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "ordersOrderHistoryResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ordersOrder"
+          }
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ordersOrderItem": {
+      "type": "object",
+      "properties": {
+        "toyId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "toyName": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "ordersOrderStatus": {
+      "type": "string",
+      "enum": [
+        "STATUS_DELIVERED",
+        "STATUS_PROCESSING",
+        "STATUS_ACCEPTED",
+        "STATUS_DELIVERING",
+        "STATUS_DELAYED",
+        "STATUS_FAILED"
+      ],
+      "default": "STATUS_DELIVERED"
+    },
+    "ordersToyReturn": {
+      "type": "object",
+      "properties": {
+        "toyId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "title": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
